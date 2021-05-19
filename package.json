@@ -4,7 +4,8 @@
   "description": "city-explorer",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +21,9 @@
     "cors": "^2.8.5",
     "dotenv": "^9.0.2",
     "express": "^4.17.1"
-  }
+  },
+  "devDependencies": {
+    "json-loader": "^0.5.7"
+  },
+  "keywords": []
 }
