@@ -4,6 +4,7 @@ const express = require('express');
 require('dotenv').config(); 
 const cors = require('cors');
 const weather = require('./data/weather.json');
+const { request } = require('express');
 
 const app = express(); 
 
@@ -16,12 +17,12 @@ const PORT = process.env.PORT || 3000;
 //     response.send('hello from the home route!');
 // });
 
-app.get('/weather&lat=${weather.lat}&lon=${weather.lon}&searchQuery=${weather.city_name}', (request, response) => {
+app.get(`/weather?`, (request, response) => {
     response.status(200).send(weather);
 });
 
 app.get('*', (request, response) => {
-    response.status(404).send('not found');
+    response.status(500).send('Uh oh... Something went wrong');
 })
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
