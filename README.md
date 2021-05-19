@@ -19,3 +19,5 @@ After installation of dependencies like `cors` `env` and `express`, creation of 
 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
 
 ## Credit and Collaborations
+
+[Data Flow Chart](/dataFlow.jpg);
