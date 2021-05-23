@@ -21,16 +21,16 @@ const map =require('./lib/map/fetchMap.js');
 //     let LocationData = await axios.get(url);
 //     return LocationData.data;
 // }
-app.get(`/movie`, async(request, response) => {
-    let search = request.query.search
-    let movieData = await movie.fetchMovie(search);
-    response.send(movieData); 
+app.get('/movie', async(request, response) => {
+    let query = request.query.query
+    let movieData = await movie.fetchMovie(query);
+    response.json(movieData); 
 })
 app.get('/map', async (request, response) => {
     let lat = request.query.lat
     let lon = request.query.lon
     let mapData = await map.fetchMap(lat, lon); 
-    response.json(mapData); 
+    response.send(mapData); 
 })
 app.get('/location', async (request, response) => {
     let searchQuery = request.query.search; 
