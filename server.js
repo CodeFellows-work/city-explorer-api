@@ -16,11 +16,7 @@ const weather = require('./lib/weather/fetchWeatherData.js');
 const location = require('./lib/location/fetchLocationData.js'); 
 const map =require('./lib/map/fetchMap.js');
 
-// async function fetchLocationData (searchQuery) {
-//     let url = `https://us1.locationiq.com/v1/search.php?key=${API_KEY}&q=${searchQuery}&format=json`
-//     let LocationData = await axios.get(url);
-//     return LocationData.data;
-// }
+
 app.get('/movie', async(request, response) => {
     let query = request.query.query
     let movieData = await movie.fetchMovie(query);
@@ -37,15 +33,25 @@ app.get('/location', async (request, response) => {
     let locationData = await location.fetchLocationData(searchQuery); 
     response.send(locationData);
 });
-app.get('/weather', async (request, response) => {
-    let lat = request.query.lat;
-    let lon = request.query.lon;
-    console.log(lat, lon); 
-    let weatherData = await weather.fetchWeatherData(lat, lon);
-    response.send(weatherData);
-});
-app.get('*', (request, response) => {
-    response.status(500).send('Uh oh... Something went wrong');
-});
+// app.get('/weather', async (request, response) => {
+//     let lat = request.query.lat;
+//     let lon = request.query.lon;
+//     console.log(lat, lon); 
+//     let weatherData = await weather.fetchWeatherData(lat, lon);
+//     response.send(weatherData);
+// });
+// app.get('*', (request, response) => {
+//     response.status(500).send('Uh oh... Something went wrong');
+// });
+app.get('/weather', weatherHandler);
+
+function weatherHandler(request, response) {
+    const { lat, lon } = request.query;
+    weather(lat, lon)
+    .then(summaries => response.send(summaries))
+    .catch((error) => {
+    console.error(error);
+    response.status(200).send('Sorry. Something went wrong!')
+    });
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
